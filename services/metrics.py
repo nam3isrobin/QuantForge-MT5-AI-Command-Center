@@ -11,7 +11,6 @@ def calculate_summary_stats(results: Dict[str, Any], initial_cash: float) -> Dic
     total_trades = trades_info.get('total', {}).get('total', 0)
     
     won = trades_info.get('won', {}).get('total', 0)
-    lost = trades_info.get('lost', {}).get('total', 0)
     win_rate = (won / total_trades * 100) if total_trades > 0 else 0.0
     
     # Profit factor: gross profit / gross loss

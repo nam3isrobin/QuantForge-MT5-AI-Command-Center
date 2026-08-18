@@ -68,7 +68,7 @@ def extract_all_metrics(df):
         max_dd_str = str(metrics.get("Max Drawdown", "0"))
         max_dd = float(max_dd_str.split('(')[0].replace(' ', '')) if '(' in max_dd_str else float(max_dd_str.replace(' ', ''))
         metrics['Calmar Ratio (Est)'] = f"{net_profit / max_dd:.2f}" if max_dd > 0 else "N/A"
-    except:
+    except (ValueError, TypeError, ZeroDivisionError):
         metrics['Calmar Ratio (Est)'] = "N/A"
         
     return metrics

@@ -29,7 +29,14 @@ The **QuantForge: MT5 AI Command Center** is a professional-grade graphical inte
    pip install -r requirements.txt
    ```
 
-4. **Configure MT5 Path**:
+4. **Configure Settings**:
+   Copy `settings.example.json` to `settings.json` (this file is gitignored so your API key never gets committed):
+   ```bash
+   copy settings.example.json settings.json
+   ```
+   The app reads the Gemini API key and model name from `settings.json`; if it is missing, it falls back to the empty `settings.example.json` template.
+
+5. **Configure MT5 Path**:
    Open `config.py` and modify the `DEFAULT_MT5_TERMINAL_PATH` and `DEFAULT_MT5_DATA_PATH` to point to your broker's MetaTrader 5 installation on your PC.
    ```python
    # Example
@@ -59,6 +66,14 @@ To use the Gemini AI features:
 1. Get a free API key from [Google AI Studio](https://aistudio.google.com/).
 2. Paste it into the **AI Analyst Configuration** block in the sidebar.
 3. The UI will automatically detect all AI models available to your key. Select one, expand the AI section under your equity curve, and click **Generate AI Analysis**.
+
+## 🧪 Running the Tests
+Unit tests cover the MT5 report parser (`services/mt5_parser.py`) using sample HTML/XML report fixtures in `tests/fixtures/`.
+
+```bash
+pip install -r requirements-dev.txt
+python -m pytest tests/
+```
 
 ## 🛠 Tech Stack
 * **Frontend**: Streamlit, Plotly, Custom CSS

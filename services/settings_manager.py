@@ -3,14 +3,16 @@ import os
 import config
 
 SETTINGS_FILE = os.path.join(config.BASE_DIR, "settings.json")
+EXAMPLE_SETTINGS_FILE = os.path.join(config.BASE_DIR, "settings.example.json")
 
 def load_settings():
-    if os.path.exists(SETTINGS_FILE):
-        try:
-            with open(SETTINGS_FILE, 'r') as f:
-                return json.load(f)
-        except:
-            return {}
+    for path in (SETTINGS_FILE, EXAMPLE_SETTINGS_FILE):
+        if os.path.exists(path):
+            try:
+                with open(path, 'r') as f:
+                    return json.load(f)
+            except (OSError, json.JSONDecodeError):
+                continue
     return {}
 
 def save_settings(settings):
